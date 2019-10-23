@@ -39,7 +39,7 @@ class TestSystemDlpService(object):
     except exceptions.PermissionDenied as e:
       print("********____:", e.message)
       return e.message == "Request is prohibited by organization's policy"
-    except:
+    except Exception as e:
       print("unexpected error:", e)
       pass
     return False
