@@ -132,7 +132,7 @@ def system(session):
 
   # Run py.test against the system tests.
   if system_test_exists:
-    session.run("py.test", system_test_path, env=env, *session.posargs)
+    session.run("py.test", '--capture=sys' system_test_path, env=env, *session.posargs)
   if system_test_folder_exists:
     session.run(
         "py.test", "--quiet", system_test_folder_path, env=env, *session.posargs

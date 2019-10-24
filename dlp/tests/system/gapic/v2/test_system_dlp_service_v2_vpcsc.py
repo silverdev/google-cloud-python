@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 Google LLC
@@ -24,14 +25,13 @@ from google.api_core import exceptions
 
 PROJECT_INSIDE = os.environ.get("PROJECT_ID", None)
 PROJECT_OUTSIDE = os.environ.get(
-    "GOOGLE_CLOUD_TESTS_VPCSC_OUTSIDE_PERIMETER_PROJECT", None
-)
+    "GOOGLE_CLOUD_TESTS_VPCSC_OUTSIDE_PERIMETER_PROJECT", None)
 IS_INSIDE_VPCSC = (
-    os.environ.get("GOOGLE_CLOUD_TESTS_IN_VPCSC", "false").lower() == "true"
-)
+    os.environ.get("GOOGLE_CLOUD_TESTS_IN_VPCSC", "false").lower() == "true")
 
 
 class TestSystemDlpService(object):
+
   @staticmethod
   def _is_rejected(call):
     try:
@@ -53,7 +53,6 @@ class TestSystemDlpService(object):
       assert not (TestSystemDlpService._is_rejected(delayed_outside))
       assert TestSystemDlpService._is_rejected(delayed_inside)
 
-
   @pytest.mark.skipif(
       not IS_INSIDE_VPCSC,
       reason="This test requires a VPCSC and setting GOOGLE_CLOUD_TESTS_IN_VPCSC",
@@ -70,7 +69,6 @@ class TestSystemDlpService(object):
     delayed_outside = lambda: client.list_deidentify_templates(name_outside)
     TestSystemDlpService._do_test(delayed_inside, delayed_outside)
 
-
   @pytest.mark.skipif(
       not IS_INSIDE_VPCSC,
       reason="This test requires a VPCSC and setting GOOGLE_CLOUD_TESTS_IN_VPCSC",
@@ -86,7 +84,6 @@ class TestSystemDlpService(object):
     name_outside = client.project_path(PROJECT_OUTSIDE)
     delayed_outside = lambda: client.list_dlp_jobs(name_outside)
     TestSystemDlpService._do_test(delayed_inside, delayed_outside)
-
 
   @pytest.mark.skipif(
       not IS_INSIDE_VPCSC,
@@ -119,7 +116,6 @@ class TestSystemDlpService(object):
     name_outside = client.project_path(PROJECT_OUTSIDE)
     delayed_outside = lambda: client.get_job_trigger(name_outside)
     TestSystemDlpService._do_test(delayed_inside, delayed_outside)
-
 
   @pytest.mark.skipif(
       not IS_INSIDE_VPCSC,
