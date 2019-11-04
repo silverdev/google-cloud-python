@@ -121,6 +121,7 @@ def system(session):
   session.install("-e", "../test_utils/")
   session.install("-e", ".")
 
+  env = {}
   # Additional setup for VPCSC system tests
   if os.environ.get("GOOGLE_CLOUD_TESTS_IN_VPCSC") != "True":
     # Unset PROJECT_ID, since VPCSC system tests expect this to be a project
